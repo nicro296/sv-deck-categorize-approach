@@ -256,7 +256,7 @@ The deck types \[Pure resonance Portal, Resonance (bahamut) Portal, Puppet reson
 <br>
 The elements are defined as follows
 
-|Element Name|identification card|Conditions 採用枚数|
+|Element Name|identification card|Conditions for the number of adopted cards|
 |----|----|----|
 |Bahamut|\[Ultimate Bahamut,Terra Finis\]|4 or more|
 
