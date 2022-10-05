@@ -167,12 +167,12 @@ Each of these is explained later.
 
 
 ##### Adoption rate [P].
-Defined for each card[card] and its number of adopted cards[n].
+Defined for each card[card] and its number of cards[n] in the deck.
 ```
 P(card,n) = Calculated by preparing a group of sample decks (0.0≤P≤1.0)
 ```
-###### Example When the number of goblins adopted by each player is as follows
-|sample deck|Number of cards(goblin) adopted|
+###### Example When the number of goblins in the deck by each player is as follows
+|sample deck|Number of cards(goblin) in the deck|
 |----|----|
 |deckA|3|
 |deckB|3|
@@ -238,7 +238,7 @@ Each deck type shall have a "category" and an "element".
 > Each deck type has one category.
 
 #### element
-> Elements are determined based on the number of specific cards adopted.
+> Elements are determined based on the number of specific cards in the deck.
 > A deck type can have more than one element. It does not have to have any one.
 
 The target deck type is derived from the information of the category with the highest evaluation value that satisfies the threshold value and the element that satisfies the condition.
@@ -256,7 +256,7 @@ The deck types \[Pure resonance Portal, Resonance (bahamut) Portal, Puppet reson
 <br>
 The elements are defined as follows
 
-|Element Name|identification card|Conditions for the number of adopted cards|
+|Element Name|identification card|Conditions for the number of cards in the deck|
 |----|----|----|
 |Bahamut|\[Ultimate Bahamut,Terra Finis\]|4 or more|
 
