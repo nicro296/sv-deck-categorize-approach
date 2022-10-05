@@ -1,6 +1,6 @@
 # sv-deck-categorize-approach
 
-[English translation is here](https://github.com/nicro296/sv-deck-categorize-approach/edit/main/README.md#deck-type-evaluation-methods)
+[English translation is here](https://github.com/nicro296/sv-deck-categorize-approach#deck-type-evaluation-methods)
 
 ## デッキタイプの評価の方法
 デッキタイプ分類済みのサンプルデッキを用いて分析対象のデッキ\[deck\](以降ターゲットデッキと呼ぶ)の分類を行う方法について、現在行っている範囲でまとめた。
@@ -244,51 +244,51 @@ The target deck type is derived from the information of the category with the hi
 When the evaluation values for all categories do not meet the threshold, the deck type is treated as "unclassified.
 
 #### 例
-The deck types \[pure resonance nemesis, resonance (bahamut) nemesis, puppet resonance nemesis\] that were in the RGW environment can be defined as follows.
+The deck types \[Pure resonance Portal, Resonance (bahamut) Portal, Puppet resonance Portal\] that were in the RGW environment can be defined as follows.
 
-|デッキタイプ|カテゴリー|要素|
+|decktype|category|element|
 |----|----|----|
-|純共鳴Nm|共鳴|無し|
-|共鳴(バハムート)Nm|共鳴|\[バハムート\]|
-|人形共鳴Nm|人形共鳴|無し|
+|Pure resonance Portal|resonance|Nothing|
+|Resonance(bahamut) Portal|resonance|\[Bahamut\]|
+|Puppet resonance Portal|puppet resonanse|Nothing|
 
 <br>
-要素は以下のように定義される。
+The elements are defined as follows
 
-|要素名|判別カード|採用枚数の条件|
+|Element Name|identification card|Conditions 採用枚数|
 |----|----|----|
-|バハムート|\[バハムート,終焉の地\]|4枚以上|
+|Bahamut|\[Ultimate Bahamut,Terra Finis\]|over 4 cards|
 
-##### Q.人形共鳴ネメシスでカテゴリーを共鳴として要素に人形としていないのはなぜ?
-> A.人形共鳴の評価関数が共鳴とは似ていないため一つのカテゴリーに入れる必要がないから。
-> 基本的にはカテゴリーで分類を行い、評価関数が似通っているが分類を行いたい場合にカテゴリーを共通化して一方または双方に要素を追加することで差別化する。
+##### Q.Why is the category in Puppet Resonance Nemesis not listed as Puppet in Elements as Resonance?
+> A.Because the evaluation function of puppet resonance is not similar to that of resonance and does not need to be placed in one category.
+> Basically, classification is done by category, and differentiation is done by making the categories common and adding elements to one or both when the evaluation functions are similar but the classification is desired.
 
-同じカテゴリーでもデッキタイプごとにリストに異なった特徴があるためカテゴリーの評価関数はデッキタイプごとに用意する方が都合がよい。
+It is more convenient to have a category evaluation function for each deck type because each deck type has different characteristics in the same category.
 <br>
-##### Q.同カテゴリーのデッキタイプの評価関数間で閾値を満たしているものと満たしていないものが出た場合は?
-> A.一つでも評価値を満たしているなら満たしているものとして扱う。
-> デッキリストが似ていることよりも優先して分類に作用するカードがあるから要素で判断するので、もし共鳴(バハムート)のカテゴリー評価関数では閾値を満たさなくても純共鳴のカテゴリー評価関数で閾値を超えており、要素「バハムート」を持つデッキであれば共鳴(バハムート)に分類することになる。
+##### Q.What if some thresholds are met and some are not met between evaluation functions for the same category of deck types?
+> A.If even one of the evaluation values is met, treat it as met.
+> Since the deck list is judged by element because there are cards that act on the classification in preference to similarity, if the deck exceeds the threshold in the category evaluation function for pure resonance and has the element "Bahamut" even if it does not meet the threshold in the category evaluation function for resonance (Bahamut), it will be classified as a resonance (Bahamut) deck.
 
-##### Q.複数のデッキタイプの条件を満たしているときは?
-> A.デッキタイプの条件(カテゴリーと要素)を複数満たしている時の優先順位を定義する必要がある。
-> 上記の例では共鳴(バハムート)の条件を満たすデッキは純共鳴の条件を満たしているので優先順位は共鳴バハムートのほうが高く設定する。要素の条件がきついほど条件を満たしているときの優先順位は高く設定するのが基本。
+##### Q.When multiple deck type requirements are met?
+> A.Priority needs to be defined when multiple deck type conditions (categories and elements) are met.
+> In the above example, the deck that meets the conditions of resonance (Bahamut) meets the conditions of pure resonance, so the priority should be set higher for resonance Bahamut. The tighter the conditions of the element, the higher the priority should be set when the conditions are met.
 
 
-#### 閾値に対するイメージ
-上記の分類方法をJCGで使っている(閾値 = 0.80)イメージとして
+#### Feel for threshold values
+The above classification method is used by JCG (threshold = 0.80) The image is
 
-1. リストが固まっているデッキタイプは手を加えなくても十分に分類される。
-2. 大会上位デッキ(予選決勝勝ちデッキ)は26~32/32分類できている。
-3. 大会エントリー全体では10~20%が未分類扱い、未分類を除いた誤った分類はないに等しい。
-4. 個人的な視点だが少し見慣れないカードの積み方をしたリストをはじいているのでそういったリストが出てきていることを私自身が認知しやすい
+1. Deck types with a solid list are well classified without any modification.
+2. The top decks in the tournament (decks that won the preliminary finals) are classified as 26-32/32.
+3. Overall, 10~20% of the tournament entries are treated as unclassified, and there are no misclassifications except for unclassified.
+4. From a personal perspective, it's easy for me to recognize that such a list is out there because I'm bursting to see a list with a slightly unfamiliar stacking of cards.
 
-似通っているデッキタイプが存在しているか、リストが変遷している時期か、サンプルデッキ数が確保できているか、によって精度が影響を受けやすい。
+Accuracy is likely to be affected by the existence of similar deck types, the timing of the list transition, and the number of sample decks available.
 <br>
-現在行っている方法の閾値は0.7から0.8あたりが考慮範囲。JCG 23rd Vol.1とVol.3をサンプルデッキとしてVol.4を分類したところ916デッキ中、未分類は81デッキ(閾値0.8)、33デッキ(閾値0.7)であった。誤分類らしきものは閾値0.7の時にベレロフォンを積んでいない3デッキが回復Bに分類されていた(Vol.1,Vol.3では未分類のまま対処していた)ことのみであった。
+The threshold of the current method is in the range of 0.7 to 0.8, and the classification of Vol. 4 using JCG 23rd Vol. 1 and Vol. 3 as sample decks showed that out of 916 decks, 81 were unclassified (threshold 0.8) and 33 (threshold 0.7) were unclassified. The only misclassification was that 3 decks without Bellerophon were classified as Recovery B when the threshold was 0.7 (they were still unclassified in Vols. 1 and 3).
 <br>
-前期に比べて似通ったデッキタイプがない(前期の人形Nm,共鳴Nm,共鳴人形Nm)分閾値は低くても大きな問題はなさそう。
+The lack of similar deck types compared to the previous period (puppet Nm, resonance Nm, resonance puppet Nm in the previous period) seems not to be a major problem even if the threshold is lower.
 <br>
-しかし閾値を下げることは似通ったデッキタイプが生まれやすくなるということであり要素による分類により注力することを意味するので目的に合わせて考える必要があると思う。
+However, lowering the threshold means that similar deck types are more likely to emerge, which means more focus on categorization by element, so it is necessary to consider the purpose of this approach.
 
 
 
