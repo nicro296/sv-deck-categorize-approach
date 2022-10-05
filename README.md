@@ -3,7 +3,7 @@
 [English translation is here](https://github.com/nicro296/sv-deck-categorize-approach#deck-type-evaluation-methods)
 
 ## デッキタイプの評価の方法
-デッキタイプ分類済みのサンプルデッキを用いて分析対象のデッキ\[deck\](以降ターゲットデッキと呼ぶ)の分類を行う方法について、現在行っている範囲でまとめた。
+デッキタイプ分類済みのサンプルデッキを用いて分析対象のデッキ\[deck\](以降「ターゲットデッキ」と呼ぶ)の分類を行う方法について、現在行っている範囲でまとめた。
 
 
 #### 評価関数[V]
@@ -44,7 +44,7 @@ P(ゴブリン,3) = 0.33;
 ```
 S(deck) = Σ[デッキ内のカード] P(card,n)
 ```
-同名カードが複数採用され手入れも1枚目、2枚目、3枚目、それぞれのPの値を合計するためデッキのカード40枚のPの和となり、Sは0.0≦S≦40.0を満たす
+同名カードが複数採用されていても1枚目、2枚目、3枚目、それぞれのPの値を合計するためデッキのカード40枚のPの和となり、Sは0.0≦S≦40.0を満たす
 
 ##### 重み付け係数[W]
 0.0≦V≦1.0を満たすようにWを指定する。
@@ -92,7 +92,7 @@ P'(card,n) =
 
 #### 要素
 > 要素は特定カードの採用枚数を条件として判断される。
-> デッキタイプは複数の要素を持つことができる。
+> デッキタイプは複数の要素を持つことができる。一つも持たなくてもよい。
 
 ターゲットデッキは閾値を満たす最も評価値が高くなるカテゴリーと条件を満たす要素の情報からデッキタイプが導かれる。
 全てのカテゴリーの評価値が閾値を満たさない時デッキタイプが「未分類」として扱う。
@@ -113,14 +113,14 @@ RGW環境にいたデッキタイプ\[純共鳴ネメシス、共鳴(バハム�
 |----|----|----|
 |バハムート|\[バハムート,終焉の地\]|4枚以上|
 
-##### Q.人形共鳴ネメシスでカテゴリーを共鳴として要素に人形としていないのはなぜ?
+##### Q.人形共鳴ネメシスでカテゴリーを共鳴として、要素に人形としていないのはなぜ?
 > A.人形共鳴の評価関数が共鳴とは似ていないため一つのカテゴリーに入れる必要がないから。
 > 基本的にはカテゴリーで分類を行い、評価関数が似通っているが分類を行いたい場合にカテゴリーを共通化して一方または双方に要素を追加することで差別化する。
 
 同じカテゴリーでもデッキタイプごとにリストに異なった特徴があるためカテゴリーの評価関数はデッキタイプごとに用意する方が都合がよい。
 <br>
 ##### Q.同カテゴリーのデッキタイプの評価関数間で閾値を満たしているものと満たしていないものが出た場合は?
-> A.一つでも評価値を満たしているなら満たしているものとして扱う。
+> A.一つでも評価値を満たしているならそのカテゴリー満たしているものとして扱う。
 > デッキリストが似ていることよりも優先して分類に作用するカードがあるから要素で判断するので、もし共鳴(バハムート)のカテゴリー評価関数では閾値を満たさなくても純共鳴のカテゴリー評価関数で閾値を超えており、要素「バハムート」を持つデッキであれば共鳴(バハムート)に分類することになる。
 
 ##### Q.複数のデッキタイプの条件を満たしているときは?
@@ -129,12 +129,12 @@ RGW環境にいたデッキタイプ\[純共鳴ネメシス、共鳴(バハム�
 
 
 #### 閾値に対するイメージ
-上記の分類方法をJCGで使っている(閾値 = 0.80)イメージとして
+上記の分類方法をJCGで使っている(閾値 = 0.80)感触をざっくり書く。
 
 1. リストが固まっているデッキタイプは手を加えなくても十分に分類される。
 2. 大会上位デッキ(予選決勝勝ちデッキ)は26~32/32分類できている。
 3. 大会エントリー全体では10~20%が未分類扱い、未分類を除いた誤った分類はないに等しい。
-4. 個人的な視点だが少し見慣れないカードの積み方をしたリストをはじいているのでそういったリストが出てきていることを私自身が認知しやすい
+4. 個人的な視点だが少し見慣れないカードの積み方をしたリストをはじいているのでそういったリストが出てきていることを私自身が認知しやすい。
 
 似通っているデッキタイプが存在しているか、リストが変遷している時期か、サンプルデッキ数が確保できているか、によって精度が影響を受けやすい。
 <br>
@@ -147,9 +147,8 @@ RGW環境にいたデッキタイプ\[純共鳴ネメシス、共鳴(バハム�
 
 
 
-
 ## Deck Type Evaluation Methods
-Using a sample deck that has already been classified into a deck type, this section summarizes how to classify the deck [deck] to be analyzed (henceforth referred to as the target deck). This is my own method and not a completed theory.
+Using a sample deck that has already been classified into a deck type, this section summarizes how to classify the deck [deck] to be analyzed (henceforth referred to as the "target deck"). This is my own method and not a completed theory.
 
 
 #### Evaluation Function [V]
@@ -168,11 +167,11 @@ Each of these is explained later.
 
 
 ##### Adoption rate [P].
-Defined for each card [card] and its number of adopted cards [n].
+Defined for each card[card] and its number of adopted cards[n].
 ```
 P(card,n) = Calculated by preparing a group of sample decks (0.0≤P≤1.0)
 ```
-###### Example When the number of goblins employed by each player is as follows
+###### Example When the number of goblins adopted by each player is as follows
 |sample deck|Number of cards(goblin) adopted|
 |----|----|
 |deckA|3|
@@ -188,16 +187,16 @@ P(goblin,3) = 0.33;
 
 ##### Degree of deck match [S]
 ```
-S(deck) = Σ[cards in the deck] P(card,n)
+S(deck) = Σ[each card in the deck] P(card,n)
 ```
-Even if multiple cards with the same name are used, the P value of the first card, the second card, the third card, and each P value is summed, so the sum of the P values of the 40 cards in the deck is obtained, and S satisfies 0.0 ≤ S ≤ 40.0 .
+Even if multiple cards with the same name are used, the P value of the first card, the second card, the third card, and each P value is summed, so the sum of the P values of the 40 cards in the deck is the sum of the P values of the 40 cards, and S satisfies 0.0≤S≤40.0.
 
 ##### weighted coefficient [W]
 Specify W to satisfy 0.0 ≤ V ≤ 1.0.
 <br>
 The more scattered the cards in the sample decks, the smaller the value of S tends to be. To avoid differences in the scale of evaluation values among deck types, we weighted S based on the maximum possible value of S [Smax].
 <br>
-The sum of 40 [P] added in order from the highest value to the lowest is Smax,
+The sum of 40 [P] added in order from the highest value to the lowest is "Smax",
 ```
 V = S/Smax
 W = 1/Smax
@@ -206,7 +205,7 @@ W = 1/Smax
 #### Preparation of Sample Decks
 Since it is difficult to prepare a deck for an individual to put together, an unclassified deck from the target deck is used as a sample deck by manually naming the deck type.
 <br>
-The decks classified based on this are also added to the sample deck. Currently, the evaluation function uses 0.8 as the threshold for classification, and those that do not fit any of the criteria are either unclassified or named manually.
+The decks classified based on this are also added to the sample deck. Currently, the evaluation function uses 0.8 as the threshold for classification, and target decks that did not meet the rating for any deck type were unclassified or named manually.
 
 #### Consideration for Inadequate Sample Data
 As a measure to deal with small or biased sample decks, the value of P is modified as follows.
@@ -226,9 +225,11 @@ This evaluation function V is still in its infancy. It is convenient to limit th
 <br>
 
 ## Hierarchical Treatment of Deck Types
-When classifying between deck types that employ similar cards, it is inevitably necessary to rely on specific cards for classification.
+When classifying between deck types that adopt similar cards, it is inevitably necessary to rely on specific cards for classification.
 <br>
-Since dependence on specific cards, in other words, dependence on the text of cards, is information that cannot be obtained from the distribution of the number of cards, we believe it is necessary to use a fundamentally different method to evaluate this information. We have to set a condition for the number of specific cards to be used, which is a manual process that we would like to avoid, but we cannot think of any other method.
+Since dependence on specific cards, in other words, dependence on the text of cards, is information that cannot be obtained from the distribution of the number of cards, I consider it necessary to evaluate it by a fundamentally different method.
+I cannot think of any other method, although I would like to avoid setting the conditions manually.
+Therefore, I set a condition for the number of specific cards to be used to determine the number of cards.
 <br>
 The structure of the deck type classification will be changed accordingly.
 Each deck type shall have a "category" and an "element".
@@ -237,13 +238,13 @@ Each deck type shall have a "category" and an "element".
 > Each deck type has one category.
 
 #### element
-> Elements are determined based on the number of specific cards employed.
-> A deck type can have more than one element.
+> Elements are determined based on the number of specific cards adopted.
+> A deck type can have more than one element. It does not have to have any one.
 
 The target deck type is derived from the information of the category with the highest evaluation value that satisfies the threshold value and the element that satisfies the condition.
 When the evaluation values for all categories do not meet the threshold, the deck type is treated as "unclassified.
 
-#### 例
+#### Example
 The deck types \[Pure resonance Portal, Resonance (bahamut) Portal, Puppet resonance Portal\] that were in the RGW environment can be defined as follows.
 
 |decktype|category|element|
@@ -257,16 +258,16 @@ The elements are defined as follows
 
 |Element Name|identification card|Conditions 採用枚数|
 |----|----|----|
-|Bahamut|\[Ultimate Bahamut,Terra Finis\]|over 4 cards|
+|Bahamut|\[Ultimate Bahamut,Terra Finis\]|4 or more|
 
-##### Q.Why is the category in Puppet Resonance Nemesis not listed as Puppet in Elements as Resonance?
-> A.Because the evaluation function of puppet resonance is not similar to that of resonance and does not need to be placed in one category.
+##### Q.Why does not Puppet resonance Portl use the category "resonance" and "puppet" as an element?
+> A.Because the evaluation function of Puppet resonance is not similar to that of resonance and does not need to be placed in one category.
 > Basically, classification is done by category, and differentiation is done by making the categories common and adding elements to one or both when the evaluation functions are similar but the classification is desired.
 
 It is more convenient to have a category evaluation function for each deck type because each deck type has different characteristics in the same category.
 <br>
 ##### Q.What if some thresholds are met and some are not met between evaluation functions for the same category of deck types?
-> A.If even one of the evaluation values is met, treat it as met.
+> A.If even one of the evaluation values is met, it is treated as if the category is met.
 > Since the deck list is judged by element because there are cards that act on the classification in preference to similarity, if the deck exceeds the threshold in the category evaluation function for pure resonance and has the element "Bahamut" even if it does not meet the threshold in the category evaluation function for resonance (Bahamut), it will be classified as a resonance (Bahamut) deck.
 
 ##### Q.When multiple deck type requirements are met?
@@ -275,7 +276,7 @@ It is more convenient to have a category evaluation function for each deck type 
 
 
 #### Feel for threshold values
-The above classification method is used by JCG (threshold = 0.80) The image is
+Write a rough description of the feel of the above classification method used in JCG (threshold = 0.80).
 
 1. Deck types with a solid list are well classified without any modification.
 2. The top decks in the tournament (decks that won the preliminary finals) are classified as 26-32/32.
@@ -284,11 +285,9 @@ The above classification method is used by JCG (threshold = 0.80) The image is
 
 Accuracy is likely to be affected by the existence of similar deck types, the timing of the list transition, and the number of sample decks available.
 <br>
-The threshold of the current method is in the range of 0.7 to 0.8, and the classification of Vol. 4 using JCG 23rd Vol. 1 and Vol. 3 as sample decks showed that out of 916 decks, 81 were unclassified (threshold 0.8) and 33 (threshold 0.7) were unclassified. The only misclassification was that 3 decks without Bellerophon were classified as Recovery B when the threshold was 0.7 (they were still unclassified in Vols. 1 and 3).
+The threshold of the current method is in the range of 0.7 to 0.8, and the classification of Vol. 4 using JCG 23rd Vol. 1 and Vol. 3 as sample decks showed that out of 916 decks, 81 were unclassified (threshold 0.8) and 33 (threshold 0.7) were unclassified. The only misclassification was that 3 decks without Bellerophon were classified as Recovery B when the threshold was 0.7 (they were still unclassified in Vol.1 and Vol.3).
 <br>
 The lack of similar deck types compared to the previous period (puppet Nm, resonance Nm, resonance puppet Nm in the previous period) seems not to be a major problem even if the threshold is lower.
 <br>
 However, lowering the threshold means that similar deck types are more likely to emerge, which means more focus on categorization by element, so it is necessary to consider the purpose of this approach.
-
-
 
