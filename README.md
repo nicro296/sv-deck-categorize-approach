@@ -1,6 +1,6 @@
 # sv-deck-categorize-approach
 
-[English translation is here](https://github.com/nicro296/sv-deck-categorize-approach#deck-type-evaluation-methods)
+__[English translation is here(under japanese sentense)](https://github.com/nicro296/sv-deck-categorize-approach#deck-type-evaluation-methods)__
 
 ## デッキタイプの評価の方法
 デッキタイプ分類済みのサンプルデッキを用いて分析対象のデッキ\[deck\](以降「ターゲットデッキ」と呼ぶ)の分類を行う方法について、現在行っている範囲でまとめた。
